@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::resource('invoices', 'InvoiceController');
+Route::get('creditCards', 'CreditCardController@index');
+Route::get('creditCards/export', 'CreditCardController@export');
+Route::post('creditCards/import', 'CreditCardController@import');
 Route::get('/', function () {
     return view('welcome');
 });
