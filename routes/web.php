@@ -16,6 +16,9 @@ Route::resource('invoices', 'InvoiceController');
 Route::get('creditCards', 'CreditCardController@index');
 Route::get('creditCards/export', 'CreditCardController@export');
 Route::post('creditCards/import', 'CreditCardController@import');
+Route::post('virtualAccounts/normal', 'VirtualAccountController@normal');
+Route::get('virtualAccounts', 'VirtualAccountController@index');
+
 Route::get('/', function () {
     return view('welcome');
 });
