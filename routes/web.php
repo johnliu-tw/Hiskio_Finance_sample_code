@@ -17,6 +17,7 @@ Route::get('creditCards', 'CreditCardController@index');
 Route::get('creditCards/export', 'CreditCardController@export');
 Route::post('creditCards/import', 'CreditCardController@import');
 Route::post('virtualAccounts/normal', 'VirtualAccountController@normal');
+Route::post('virtualAccounts/advanced', 'VirtualAccountController@advanced');
 Route::get('virtualAccounts', 'VirtualAccountController@index');
 
 Route::get('/', function () {
