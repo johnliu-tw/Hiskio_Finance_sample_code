@@ -28,7 +28,8 @@ class CreditCardController extends Controller
         $tempPath = $request->all()['file']->store('temp');
         $path = storage_path('app').'/'.$tempPath;
         $import = new CreditCardsImport;
+        Excel::import($import, $path);
 
-        return Excel::import($import, $path);
+        return true;
     }
 }
