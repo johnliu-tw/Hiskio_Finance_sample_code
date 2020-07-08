@@ -77,36 +77,34 @@ class VirtualAccountController extends BaseController
     {
         try {
             $requestData = json_decode($request->getContent(), true);
-            $log = OriginLog::create([
-                'method'      => $request->getMethod(),
-                'params'      => $request->all(),
-                'uri'         => $request->getPathInfo(),
-                'remote_addr' => $request->getClientIp(),
-                'user_agent'  => $request->userAgent(),
-            ]);
-
+            $log = new OriginLog;
             $service = new AdvancedService($requestData);
             $data = $service->data();
             
-            $virtualAccount = $data['ecacc'];
-            $time           = Carbon::parse($data['date'].$data['time']);
-            $amount         = intval($data['amt']) / 100;
-            $fromBank       = $data['wdbank'];
-            $fromAccount    = $data['wdacc'];
-
-            $log->fill([
-                'data'   => [
-                    'virtual_account' => $virtualAccount,
-                    'txTime'          => $time,
-                    'depositTime'     => $time,
-                    'amount'          => $amount,
-                    'from_bank'       => $fromBank,
-                    'from_account'    => $fromAccount
-                ],
-            ])->save();
-
             if (! $service->validate()) {
                 return response()->json(['txseq' => $data['txseq'], 'ubnotify' => 'record', 'resmsg' => 'failed']);
+            } else {
+                $virtualAccount = $data['ecacc'];
+                $time           = Carbon::parse($data['date'].$data['time']);
+                $amount         = intval($data['amt']) / 100;
+                $fromBank       = $data['wdbank'];
+                $fromAccount    = $data['wdacc'];
+    
+                $log->fill([
+                    'method'      => $request->getMethod(),
+                    'params'      => $request->all(),
+                    'uri'         => $request->getPathInfo(),
+                    'remote_addr' => $request->getClientIp(),
+                    'user_agent'  => $request->userAgent(),
+                    'data'   => [
+                        'virtual_account' => $virtualAccount,
+                        'txTime'          => $time,
+                        'depositTime'     => $time,
+                        'amount'          => $amount,
+                        'from_bank'       => $fromBank,
+                        'from_account'    => $fromAccount
+                    ],
+                ])->save();
             }
             return response()->json(['txseq' => $data['txseq'], 'ubnotify' => 'record', 'resmsg' => 'succes']);
         } catch (\Throwable $th) {
