@@ -43,6 +43,7 @@ class AdvancedService
     private function validateSignature()
     {
         $publicKey = $this->getPublicKey();
+        // ! ! openssl_verify($this->mac, base64_decode($this->signature), $publicKey, OPENSSL_ALGO_SHA256);
         return ! ! openssl_verify('ubot2cchoseRSASign', base64_decode($this->signature), $publicKey, OPENSSL_ALGO_SHA256);
     }
 
