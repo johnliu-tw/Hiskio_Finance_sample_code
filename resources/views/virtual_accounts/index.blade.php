@@ -8,7 +8,6 @@
           <PaySvcRq>
           <PmtAddRq>
           <TDateSeqNo>20100310000029216</TDateSeqNo>
-          日期+序號)
           <TxnDate>20100310</TxnDate>
           <TxnTime>080000</TxnTime>
           <ValueDate>20100310</ValueDate>
