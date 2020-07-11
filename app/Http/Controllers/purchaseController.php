@@ -30,7 +30,12 @@ class PurchaseController extends BaseController
         )->submit();
     }
 
-    public function landingSuccess()
+    public function successRedirect()
+    {
+        return redirect('/purchases/success');
+    }
+
+    public function success()
     {
         return view('purchases.success');
     }

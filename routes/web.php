@@ -21,7 +21,8 @@ Route::post('virtualAccounts/advanced', 'VirtualAccountController@advanced');
 Route::get('virtualAccounts', 'VirtualAccountController@index');
 Route::get('purchases', 'PurchaseController@index');
 Route::post('purchases', 'PurchaseController@purchase');
-Route::get('purchases/success', 'PurchaseController@landingSuccess');
+Route::get('purchases/success', 'PurchaseController@success');
+Route::post('purchases/successRedirect', 'PurchaseController@successRedirect');
 Route::post('purchases/success', 'PurchaseController@postSuccess');
 Route::get('purchases/back', 'PurchaseController@back');
 
