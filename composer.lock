@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4d6efb982fe41deda2ce4857acac1fa",
+    "content-hash": "75cdedc1793d3ce66418d77df1c00358",
     "packages": [
         {
             "name": "artisaninweb/laravel-soap",
@@ -3853,6 +3853,44 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2019-10-24T08:53:34+00:00"
+        },
+        {
+            "name": "treerful/laravel-newebpay",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/pickone/laravel-newebpay.git",
+                "reference": "49c482aeb82baf42585ee9118ffb5d66c462e4c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/pickone/laravel-newebpay/get/49c482aeb82baf42585ee9118ffb5d66c462e4c4.zip",
+                "reference": "49c482aeb82baf42585ee9118ffb5d66c462e4c4",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3",
+                "php": ">=5.3.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Treerful\\NewebPay\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "w4ll4se",
+                    "email": "wallase.huang@gmail.com"
+                }
+            ],
+            "description": "A library of connecting newebpay's API service.",
+            "homepage": "https://bitbucket.org/pickone/laravel-newebpay",
+            "time": "2020-04-14T11:17:45+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

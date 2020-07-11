@@ -19,6 +19,8 @@ Route::post('creditCards/import', 'CreditCardController@import');
 Route::post('virtualAccounts/normal', 'VirtualAccountController@normal');
 Route::post('virtualAccounts/advanced', 'VirtualAccountController@advanced');
 Route::get('virtualAccounts', 'VirtualAccountController@index');
+Route::get('purchases', 'PurchaseController@index');
+Route::post('purchases', 'PurchaseController@purchase');
 
 Route::get('/', function () {
     return view('welcome');
