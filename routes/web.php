@@ -26,6 +26,14 @@ Route::post('purchases/successRedirect', 'PurchaseController@successRedirect');
 Route::post('purchases/success', 'PurchaseController@postSuccess');
 Route::get('purchases/back', 'PurchaseController@back');
 
+Route::get('purePurchases', 'PurePurchaseController@index');
+Route::post('purePurchases', 'PurePurchaseController@purchase');
+Route::get('purePurchases/success', 'PurePurchaseController@success');
+Route::post('purePurchases/successRedirect', 'PurePurchaseController@successRedirect');
+Route::post('purePurchases/success', 'PurePurchaseController@postSuccess');
+Route::get('purePurchases/back', 'PurePurchaseController@back');
+
+
 Route::get('/', function () {
     return view('welcome');
 });
