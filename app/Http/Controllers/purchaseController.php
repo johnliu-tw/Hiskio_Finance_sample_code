@@ -41,7 +41,8 @@ class PurchaseController extends BaseController
     }
     public function postSuccess(Request $request)
     {
-        Log::info('app.requests', ['request' => $request->all()]);
+        $newebpay = new NewebPay();
+        Log::info('app.requests', ['request' => $request->all(), 'data' => $newebpay->decodeCallback($request->all()['TradeInfo'])]);
     }
     public function back()
     {
