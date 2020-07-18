@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Product;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        Product::updateOrCreate(['id' => 1, 'name' => '測試商品1', 'price' => 200]);
+        Product::updateOrCreate(['id' => 2, 'name' => '測試商品2', 'price' => 500]);
     }
 }
