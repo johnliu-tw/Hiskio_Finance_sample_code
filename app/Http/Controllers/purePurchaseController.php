@@ -8,17 +8,25 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Services\PurchaseService;
+use App\Product;
 
 class PurePurchaseController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function index()
     {
-        return view('pure_purchases.index');
+        $products = Product::all();
+        return view('pure_purchases.index')->with('products', $products);
+        ;
     }
   
     public function purchase(Request $request)
     {
+        $params = $request->all();
+        $service = new PurchaseService(env('CASH_STORE_ID'), env('CASH_STORE_HASH_KEY'), env('CASH_STORE_HASH_IV'));
+        $product = Product::whereId($params['productId'])->first();
+        $result = $service->getPayload($product, $params['method']);
     }
 
     public function successRedirect()
