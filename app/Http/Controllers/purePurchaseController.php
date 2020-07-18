@@ -47,6 +47,10 @@ class PurePurchaseController extends BaseController
     }
     public function postSuccess(Request $request)
     {
+        $params = $request->all();
+        $service = new PurchaseService(env('CASH_STORE_ID'), env('CASH_STORE_HASH_KEY'), env('CASH_STORE_HASH_IV'));
+        $result = $service->parsePayload($params['TradeInfo']);
+        Log::info('app.requests', ['request' => $params, 'data' => $result]);
     }
     public function back()
     {

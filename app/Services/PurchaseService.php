@@ -32,6 +32,11 @@ class PurchaseService
         ];
     }
 
+    public function parsePayload($params)
+    {
+        return json_decode($this->aesDecrypt($params, $this->hashKey, $this->hashIV));
+    }
+
     private function setPayload($product, $method)
     {
         $payload = collect([
@@ -72,5 +77,28 @@ class PurchaseService
         $pad = $blocksize - ($len % $blocksize);
         $string .= str_repeat(chr($pad), $pad);
         return $string;
+    }
+    private function aesDecrypt($parameter, $key, $iv)
+    {
+        return $this->strippadding(openssl_decrypt(
+            hex2bin($parameter),
+            'AES-256-CBC',
+            $key,
+            OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING,
+            $iv
+        ));
+    }
+
+    private function strippadding($string)
+    {
+        $slast = ord(substr($string, -1));
+        $slastc = chr($slast);
+        $pcheck = substr($string, -$slast);
+        if (preg_match("/$slastc{" . $slast . "}/", $string)) {
+            $string = substr($string, 0, strlen($string) - $slast);
+            return $string;
+        } else {
+            return false;
+        }
     }
 }
