@@ -22,8 +22,14 @@ class PurchaseService
     public function getPayload($product, $method)
     {
         $payload = $this->setPayload($product, $method);
-
-        return $payload;
+        $encryptedPayload = $this->aesEncrypt($payload->toArray(), $this->hashKey, $this->hashIV);
+        $encodeString = "HashKey=$this->hashKey&$encryptedPayload&HashIV=$this->hashIV";
+        return [
+          'MerchantID' => $this->merchantID,
+          'TradeInfo' => $encryptedPayload,
+          'TradeSha' => strtoupper(hash("sha256", $encodeString)),
+          'Version' => 1.5
+        ];
     }
 
     private function setPayload($product, $method)
@@ -48,5 +54,23 @@ class PurchaseService
         }
 
         return $payload;
+    }
+
+    private function aesEncrypt($parameter = "", $key = "", $iv = "")
+    {
+        $returnStr = '';
+        if (!empty($parameter)) {
+            $returnStr = http_build_query($parameter);
+        }
+
+        return trim(bin2hex(openssl_encrypt($this->addpadding($returnStr), 'aes-256-cbc', $key, OPENSSL_RAW_DATA|OPENSSL_ZERO_PADDING, $iv)));
+    }
+
+    private function addpadding($string, $blocksize = 32)
+    {
+        $len = strlen($string);
+        $pad = $blocksize - ($len % $blocksize);
+        $string .= str_repeat(chr($pad), $pad);
+        return $string;
     }
 }
