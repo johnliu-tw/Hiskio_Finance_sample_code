@@ -25,8 +25,9 @@ class PurePurchaseController extends BaseController
     {
         $params = $request->all();
         $service = new PurchaseService(env('CASH_STORE_ID'), env('CASH_STORE_HASH_KEY'), env('CASH_STORE_HASH_IV'));
-        $product = Product::whereId($params['productId'])->first();
+        $product = Product::find($params['productId']);
         $result = $service->getPayload($product, $params['method']);
+        dd($result);
     }
 
     public function successRedirect()

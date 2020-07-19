@@ -43,7 +43,7 @@ class PurchaseService
         if ($method == 'atm') {
             $payload = $payload->merge(["VACC" => 1, 'CustomerURL' => env('CASH_CLIENT_CUSTOMER_URL')]);
         }
-        if ($method == 'credit') {
+        if ($method == 'card') {
             $payload = $payload->merge(["CREDIT" => 1 ]);
         }
 
