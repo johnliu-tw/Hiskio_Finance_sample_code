@@ -8,8 +8,8 @@
     @endforeach
   </select>
   <select name='method' class="form-control form-control mt-3">
-    <option value='atm'>ATM</option>
-    <option value='credit'>信用卡</option>
+    <option value='atm'>銀行轉帳</option>
+    <option value='card'>信用卡</option>
   </select>
   <button type="submit" class="btn btn-primary mt-3">純粹的送出</button>
 </form>
