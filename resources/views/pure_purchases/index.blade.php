@@ -13,3 +13,14 @@
   </select>
   <button type="submit" class="btn btn-primary mt-3">純粹的送出</button>
 </form>
+
+
+
+<form class="container mx-auto w-25 pt-5" action="/purePurchases/logisticsPurchase" method="post">
+  <select name='productId' class="form-control form-control mt-3">
+    @foreach( $products as $product )
+      <option value='{{ $product->id }}'>{{ $product->name }}</option>
+    @endforeach
+  </select>
+  <button type="submit" class="btn btn-primary mt-3">物流送出</button>
+</form>

@@ -32,6 +32,7 @@ Route::get('purePurchases/success', 'PurePurchaseController@success');
 Route::post('purePurchases/successRedirect', 'PurePurchaseController@successRedirect');
 Route::post('purePurchases/success', 'PurePurchaseController@postSuccess');
 Route::get('purePurchases/back', 'PurePurchaseController@back');
+Route::post('purePurchases/logisticsPurchase', 'PurePurchaseController@logisticsPurchase');
 
 
 Route::get('/', function () {

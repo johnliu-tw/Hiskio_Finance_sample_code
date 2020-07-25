@@ -19,9 +19,9 @@ class PurchaseService
         $this->hashIV = ($hashIV != null ? $hashIV : env('CASH_STORE_HASH_IV'));
     }
 
-    public function getPayload($product, $method)
+    public function getPayload($product, $method, $logistic = false)
     {
-        $payload = $this->setPayload($product, $method);
+        $payload = $this->setPayload($product, $method, $logistic);
         $encryptedPayload = $this->aesEncrypt($payload->toArray(), $this->hashKey, $this->hashIV);
         $encodeString = "HashKey=$this->hashKey&$encryptedPayload&HashIV=$this->hashIV";
         return [
@@ -37,7 +37,7 @@ class PurchaseService
         return json_decode($this->aesDecrypt($params, $this->hashKey, $this->hashIV));
     }
 
-    private function setPayload($product, $method)
+    private function setPayload($product, $method, $logistic)
     {
         $payload = collect([
             'MerchantID' => $this->merchantID,
@@ -56,6 +56,9 @@ class PurchaseService
         }
         if ($method == 'card') {
             $payload = $payload->merge(["CREDIT" => 1 ]);
+        }
+        if ($logistic) {
+            $payload = $payload->merge(["CVSCOM" => 2]);
         }
 
         return $payload;

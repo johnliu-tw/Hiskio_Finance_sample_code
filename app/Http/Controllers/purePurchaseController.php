@@ -36,6 +36,21 @@ class PurePurchaseController extends BaseController
         return $result;
     }
 
+    public function logisticsPurchase(Request $request)
+    {
+        $params = $request->all();
+        $service = new PurchaseService(env('CASH_STORE_ID'), env('CASH_STORE_HASH_KEY'), env('CASH_STORE_HASH_IV'));
+        $product = Product::find($params['productId']);
+        $payload = $service->getPayload($product, '', true);
+        $result = '<form name="newebpay" id="order-form" method="post" action=' . env('CASE_URL') . ' >';
+        foreach ($payload as $key => $value) {
+            $result .= '<input type="hidden" name="' . $key . '" value="' . $value . '">';
+        }
+        $result .= '</form><script type="text/javascript">document.getElementById(\'order-form\').submit();</script>';
+
+        return $result;
+    }
+
     public function successRedirect()
     {
         return redirect('/purePurchases/success');
