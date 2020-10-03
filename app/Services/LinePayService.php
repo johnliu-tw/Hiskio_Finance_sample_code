@@ -21,10 +21,23 @@ class LinePayService
         $this->baseUrl = env('LINE_URL');
     }
 
-    public function send()
+    public function payment()
     {
         $body = $this->setBody();
         $url = '/v3/payments/request';
+        
+        $header = $this->setHeader($url, $body);
+        $response = Http::withHeaders($header)->post($this->baseUrl.$url, $body);
+        dd($response->body());
+    }
+
+    public function confirm($tranId)
+    {
+        $body = array(
+          'amount' => 3000,
+          'currency' => 'TWD'
+        );
+        $url = '/v3/payments/'.$tranId.'/confirm';
         
         $header = $this->setHeader($url, $body);
         $response = Http::withHeaders($header)->post($this->baseUrl.$url, $body);
