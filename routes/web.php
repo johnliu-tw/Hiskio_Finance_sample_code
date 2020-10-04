@@ -34,6 +34,9 @@ Route::post('purePurchases/success', 'PurePurchaseController@postSuccess');
 Route::get('purePurchases/back', 'PurePurchaseController@back');
 Route::post('purePurchases/logisticsPurchase', 'PurePurchaseController@logisticsPurchase');
 
+Route::get('LinePay', 'LinePayController@index');
+Route::post('LinePay/request', 'LinePayController@request');
+Route::post('LinePay/confirm', 'LinePayController@confirm');
 
 Route::get('/', function () {
     return view('welcome');

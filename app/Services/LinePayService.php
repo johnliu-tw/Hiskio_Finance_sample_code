@@ -28,7 +28,7 @@ class LinePayService
         
         $header = $this->setHeader($url, $body);
         $response = Http::withHeaders($header)->post($this->baseUrl.$url, $body);
-        dd($response->body());
+        return $response->body();
     }
 
     public function confirm($tranId)
@@ -41,7 +41,7 @@ class LinePayService
         
         $header = $this->setHeader($url, $body);
         $response = Http::withHeaders($header)->post($this->baseUrl.$url, $body);
-        dd($response->body());
+        return $response->body();
     }
 
     public function setHeader($url, $body)
